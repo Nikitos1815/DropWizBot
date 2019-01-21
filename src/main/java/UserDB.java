@@ -56,12 +56,9 @@ class UserDB {
     public int flagCheck(Long useRid) {
         int check = 0;
         try {
-            if (collec.find(and(Filters.eq(ID, useRid),Filters.eq(FLAG,"FIO"))).first() != null){
-                System.out.println("FIO number was chosen");
-                check = 1;}
+            if (collec.find(and(Filters.eq(ID, useRid),Filters.eq(FLAG,"FIO"))).first() != null){ check = 1;}
             else if (collec.find(and(eq(ID, useRid), eq(FLAG, "Phone"))).first() != null)
-            {System.out.println("Phone number was chosen");
-                check = 2;}
+            { check = 2;}
             else if (collec.find(and(eq(ID, useRid), eq(FLAG, "Address"))).first() != null)
             {check = 3;}
             else if (collec.find(and(eq(ID, useRid), eq(FLAG, "Mail"))).first() != null)

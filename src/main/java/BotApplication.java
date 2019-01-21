@@ -29,11 +29,11 @@ public class BotApplication extends Application<BotConfig> {
         MongoClient client = new MongoClient("localhost", 27017);
         MongoDatabase database = client.getDatabase("userdb_queries");
         UserDB users = new UserDB(database);
-
+        BotFunctions SetUp = new BotFunctions(users);
         TelegramBotsApi botsApi = new TelegramBotsApi();
 
         try {
-            botsApi.registerBot(new Bot(users));
+            botsApi.registerBot(new Bot(users,SetUp));
         } catch (TelegramApiException e) {
             e.printStackTrace();
         }
