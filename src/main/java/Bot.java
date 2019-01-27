@@ -1,3 +1,5 @@
+import BotKeyboards.CellKeyboard;
+import BotKeyboards.KeyboardType;
 import org.telegram.telegrambots.api.methods.send.SendMessage;
 import org.telegram.telegrambots.api.objects.Update;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
@@ -7,13 +9,15 @@ import org.telegram.telegrambots.exceptions.TelegramApiException;
 public class Bot extends TelegramLongPollingBot {
     private UserDB db;
     private BotFunctions setup;
+    private KeyboardType keyboard;
     private String username;
     private long id;
     private long chatId;
 
-    public Bot(UserDB db, BotFunctions setup) {
+    public Bot(UserDB db, BotFunctions setup, KeyboardType keyboard) {
         this.setup = setup;
         this.db = db;
+        this.keyboard = keyboard;
     }
 
     @Override
@@ -26,7 +30,7 @@ public class Bot extends TelegramLongPollingBot {
             db.registration(username, id);
 
             if (update.getMessage().getText().equals("/start")) {
-                SendMessage message2 = Keyboards.Keyboard(chatId);
+                SendMessage message2 = keyboard.keyBoard(chatId);
                 try {
                     execute(message2); // Sending our message object to user
                 } catch (TelegramApiException e) {

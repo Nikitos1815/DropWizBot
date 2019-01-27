@@ -1,3 +1,5 @@
+import BotKeyboards.CellKeyboard;
+import BotKeyboards.KeyboardType;
 import io.dropwizard.Application;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
@@ -29,11 +31,12 @@ public class BotApplication extends Application<BotConfig> {
         MongoClient client = new MongoClient("localhost", 27017);
         MongoDatabase database = client.getDatabase("userdb_queries");
         UserDB users = new UserDB(database);
+        CellKeyboard kboard = new CellKeyboard();
         BotFunctions SetUp = new BotFunctions(users);
         TelegramBotsApi botsApi = new TelegramBotsApi();
 
         try {
-            botsApi.registerBot(new Bot(users,SetUp));
+            botsApi.registerBot(new Bot(users,SetUp, kboard));
         } catch (TelegramApiException e) {
             e.printStackTrace();
         }

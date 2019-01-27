@@ -1,3 +1,6 @@
+package BotKeyboards;
+
+import BotKeyboards.KeyboardType;
 import org.telegram.telegrambots.api.methods.send.SendMessage;
 import org.telegram.telegrambots.api.objects.replykeyboard.InlineKeyboardMarkup;
 import org.telegram.telegrambots.api.objects.replykeyboard.buttons.InlineKeyboardButton;
@@ -5,8 +8,9 @@ import org.telegram.telegrambots.api.objects.replykeyboard.buttons.InlineKeyboar
 import java.util.ArrayList;
 import java.util.List;
 
-public class Keyboards {
-    public static SendMessage Keyboard(long chat_id) {
+public class CellKeyboard implements KeyboardType {
+    @Override
+    public SendMessage keyBoard(long chat_id) {
         SendMessage message = new SendMessage() // Create a message object object
                 .setChatId(chat_id)
                 .setText("Добро пожаловать!");
